@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dao.IDepartmentDao;
 import com.model.Department;
 import com.model.Employee;
+import com.model.Meetings;
 
 /**
  * @author Fatih Totrakanlý
@@ -22,6 +23,12 @@ import com.model.Employee;
 @Transactional
 public class DepartmentServiceImpl implements IDepartmentService{
 
+	
+	// Bütün Business-Logic katmanýndaki sýnýflarda @service anostasyonu kullanýlmaktadýr.
+	// @transactional veritabanýndaki verilerin doðru ve diðer verilerle tutarlý olmasýný saðlamak için kullanýlan bir yöntemdir.
+	
+	// @service anotasyonu ayný zamanda nesneleri otomatik olarak Bean olarak oluþturmaktadýr.
+	// Aþaðýda Autowired ile IDepartmentDao interface'inden oluþturulan departmentDao Bean'i inject edilmiþtir.
 	@Autowired
 	private IDepartmentDao departmentDao;
 	
@@ -45,9 +52,19 @@ public class DepartmentServiceImpl implements IDepartmentService{
 	}
 
 
-	public void deleteById(int dep_id) {
-		 departmentDao.deleteById(dep_id);
+	public void deleteById(int dep_id,int meet_id) {
+		 departmentDao.deleteById(dep_id,meet_id);
 		
+	}
+	
+	public void createMeetingsWithDepartments(Employee employee,Department department,Meetings meetings){
+		departmentDao.createMeetingsWithDepartments(employee, department, meetings);
+		
+	}
+
+
+	public Meetings findMeetingsById(int meet_id) {
+		return departmentDao.findMeetingsById(meet_id);
 	}
 
 }

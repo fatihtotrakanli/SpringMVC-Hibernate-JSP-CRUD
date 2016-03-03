@@ -15,13 +15,13 @@ import javax.persistence.Table;
  * @author Fatih Totrakanlý
  *
  */
-
+//model sýnýflarý nesne tabanlý database modelinin tasarlandýðý sýnýflarýdýr.
 @Entity
 @Table(name = "meetings")
 public class Meetings {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)  // Primary Key Auto Increment
 	private int meet_id;
 	@Column
 	private String meet_name;
@@ -29,8 +29,10 @@ public class Meetings {
 	private String meet_descrpition;
 	
 	@ManyToOne
-	private Department dep;
+	private Department dep;  // Departman sýnýfýyla 1-n iliþki
 
+	
+	//Setter ve Getter
 	public int getMeet_id() {
 		return meet_id;
 	}

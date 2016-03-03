@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.model.Department;
 import com.model.Employee;
+import com.model.Meetings;
 import com.mysql.fabric.Response;
 import com.services.IDepartmentService;
 import com.services.IEmployeeService;
@@ -28,13 +29,19 @@ import com.services.IEmployeeService;
 
 @Controller
 public class IndexController {
-
+	
+	//Controller katmaný MVC modelinde View ve Model arasýndaki baðlantýyý kurar diyebiliriz.
+	// Model'in view'e aktarýlmasý veya view'daki mapping iþlemleri bu katmanda yapýlýr.
+	
+	//Oluþturulmuþ Bean'ler Autowired ile ismine göre direk bulunur.
+	// @Autowired, Set methodu veya Constructor methodu üzerindede kullanýlabilir. Bu kullanýmlar Spring Dependency Injection kullanýmlarýdýr.
 	@Autowired
 	private IEmployeeService employeeService;
 	
 	@Autowired
 	private IDepartmentService departmentService;
 	
+	//View katmanýndan gönderilen "index" mapping'ine veri aktarýlmasý.
 	@RequestMapping(value="/index")
 	public ModelAndView index(){
 		ModelAndView model = new ModelAndView("index");
@@ -43,19 +50,23 @@ public class IndexController {
 		
 	}
 	
+	//View katmanýnda form'dan (action=add) gönderilen bilgilerin POST methoduyla alýnýp veri tabanýna kaydedilmesi.
+	//@ModelAttribute ile tek tek veri almak yerine sýnýf tipinde bulunan bilgiler getirilmektedir.
 	@RequestMapping(value="/add" , method = RequestMethod.POST )
-	public ModelAndView newEmployee(@ModelAttribute("employee") Employee employee, @ModelAttribute("department") Department department,HttpServletResponse response) throws IOException{
+	public ModelAndView newEmployeeandMeeting(@ModelAttribute("employee") Employee employee, @ModelAttribute("department") Department department
+			,@ModelAttribute("meetings")Meetings meetings,HttpServletResponse response) throws IOException{
 		ModelAndView model = new ModelAndView("index");
-		
-		employeeService.createEmployeeWithDepartmentInfo(employee,department);
+		departmentService.createMeetingsWithDepartments(employee, department, meetings);
 		response.sendRedirect("index");
 		return model;
 	}
 	
+	//View katmanýnda sýralanmýþ olan iþçilerin 'id' bilgisine göre toplantý ve departman bilgileriyle birlikte veritabanýndan silinmesi
+	//@PathVariable ile URL ' den gönderilmiþ olan 'id' alýnmaktadýr.
 	@RequestMapping(value="/delete/{id}" , method = RequestMethod.GET )
 	public String newEmployee(@ModelAttribute("employee") Employee employee, @PathVariable("id") int id){
 		ModelAndView model = new ModelAndView("index");
-		departmentService.deleteById(id);
+		departmentService.deleteById(id,id);
 		employeeService.deleteById(id);
 		return "redirect:/index";
 	}

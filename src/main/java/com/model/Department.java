@@ -3,6 +3,7 @@ package com.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,25 +17,27 @@ import javax.persistence.Table;
  * @author Fatih Totrakanlý
  *
  */
-
+//model sýnýflarý nesne tabanlý database modelinin tasarlandýðý sýnýflarýdýr.
 @Entity
 @Table(name = "department")
 public class Department {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO) // Primary Key auto increment
 	private int dep_id;
 	@Column
 	private String dep_name;
 	@Column
 	private String dep_description;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)                    //Employee sýnýfýndan oluþturulan instance ve @onetoone anostasyonu ile sýnýflar arasýnda 1-1 iliþki
 	private Employee emp;
 	
-	@OneToMany(mappedBy = "dep")
-	private List<Meetings> meet;
-
+	@OneToMany(mappedBy = "dep")  // Meeting sýnýfýndan oluþturulan instance ve @onetomany ile sýnýflar arasýnda 1-n iliþki
+	private List<Meetings> meet;  // mappedby = onetomany e karþýlýk departman sýnýfýnda oluþturulacak "dep" instance'ýyla iliþkili olacaðýný gösterir.
+								  //Ýliþki tanýmlamalarý sayesinde departman sýnýfýnda emp_id ve meetings sýnýfýnda dep_dep_id nesneleri hibernate için kolon oluþturmaktadýr.
+	
+	//Setter ve Getter
 	public int getDep_id() {
 		return dep_id;
 	}
@@ -75,6 +78,7 @@ public class Department {
 		this.meet = meet;
 	}
 
+	//Default constructor
 	public Department() {
 		super();
 	}

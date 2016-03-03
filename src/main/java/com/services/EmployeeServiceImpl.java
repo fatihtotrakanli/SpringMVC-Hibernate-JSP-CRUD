@@ -18,10 +18,16 @@ import com.model.Employee;
  *
  */
 
+
 @Service
 @Transactional
 public class EmployeeServiceImpl implements IEmployeeService {
 
+	// Bütün Business-Logic katmanýndaki sýnýflarda @service anostasyonu kullanýlmaktadýr.
+	// @transactional veritabanýndaki verilerin doðru ve diðer verilerle tutarlý olmasýný saðlamak için kullanýlan bir yöntemdir.
+	
+	// @service anotasyonu ayný zamanda nesneleri otomatik olarak Bean olarak oluþturmaktadýr.
+	// Aþaðýda Autowired ile IEmployeeDao interface'inden oluþturulan employeeDao Bean'i inject edilmiþtir.
 	@Autowired
 	private IEmployeeDao employeeDao;
 	

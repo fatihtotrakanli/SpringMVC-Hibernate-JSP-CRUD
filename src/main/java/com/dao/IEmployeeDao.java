@@ -12,6 +12,9 @@ import com.model.Employee;
  * @author Fatih Totrakanlý
  *
  */
+
+//interface sýnýflar içi boþ sýnýflarýn tanýmlandýðý sýnýflardýr. Implement edilecekleri sýnýflar için arayüz görevi görürler.
+//EmployeeDao' da kullanýlacak methodlar. Dao, Data eriþim katmanýdýr.
 public interface IEmployeeDao {
 
 	public List<Employee> findAllWithJoinDepartmentsToEmployees();

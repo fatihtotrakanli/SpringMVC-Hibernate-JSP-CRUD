@@ -16,12 +16,14 @@ import javax.persistence.Table;
  * @author Fatih Totrakanlý
  *
  */
+
+//model sýnýflarý nesne tabanlý database modelinin tasarlandýðý sýnýflarýdýr.
 @Entity
-@Table(name="employee")
+@Table(name="employee") //database tablo ismi
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO) // Primary key auto increment
 	@Column
 	private int emp_id;
 	@Column
@@ -31,10 +33,12 @@ public class Employee {
 	@Column
 	private int emp_salary;
 	
+	//default constructor
 	public Employee() {
 		super();
 	}
 
+	// Setter ve Getter methodlarý
 	public int getEmp_id() {
 		return emp_id;
 	}

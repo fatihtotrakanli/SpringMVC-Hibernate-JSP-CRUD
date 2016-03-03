@@ -12,7 +12,8 @@ import com.model.Employee;
  * @author Fatih Totrakanlý
  *
  */
-
+//interface sýnýflar içi boþ sýnýflarýn tanýmlandýðý sýnýflardýr. Implement edilecekleri sýnýflar için arayüz görevi görürler.
+//EmployeeService' de kullanýlacak methodlar. Service, bütün Business-Logic katmanýndaki sýnýflar için kullanýlýr.
 public interface IEmployeeService {
 
 	public List<Employee> findAllWithJoinDepartmentsToEmployees();

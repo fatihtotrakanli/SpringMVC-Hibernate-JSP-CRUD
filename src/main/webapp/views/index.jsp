@@ -16,13 +16,12 @@
    
     <ul class="nav navbar-nav">
       <li class="active"><a href="index">Home</a></li>
-      <li><a href="departmensandmeetings">Departments And Meetings Information</a></li>
     </ul>
   </div>
 </nav>
 <div class="container">
 
-<h3>Add New Employee</h3>
+<h3>Add New Employee and Meeting</h3>
 <form action='add' method='post'>
  
     <table class='table table-hover table-responsive table-bordered'>
@@ -63,11 +62,21 @@
             <td><input type='text' name='dep_description' class='form-control' /></td>
             
         </tr>
+           <tr>
+            <td><b>Meeting Name</b></td>
+            <td><input type='text' name='meet_name' class='form-control' /></td>
+            
+        </tr>
+           <tr>
+            <td><b>Meeting Description</b></td>
+            <td><input type='text' name='meet_descrpition' class='form-control' /></td>
+            
+        </tr>
  
         <tr>
             <td></td>
             <td>
-                <button type="submit" class="btn btn-primary">Add Employee</button>
+                <button type="submit" class="btn btn-primary">Add Employee with Meeting</button>
             </td>
         </tr>
  
@@ -97,7 +106,7 @@
         <td><c:out value="${loe.emp.emp_salary}"></c:out></td>
          <td><c:out value="${loe.dep_name}"></c:out></td>
           <td><c:out value="${loe.dep_description}"></c:out></td>
-         
+
             <td>
              <a href="delete/${loe.emp.emp_id}">
                 <button type="submit" class="btn btn-primary">Delete</button>
