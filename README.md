@@ -23,7 +23,7 @@ Projenin UI kısmında BootStrap kullanılmıştır.
 
 Projenin düzgün şekilde koşturulması için kullanıcının
 
-    database.properties 
+    servlet-context.xml
 
 dosyasında kendi veritabanı bilgilerini girmesi gerekmetedir.
 
